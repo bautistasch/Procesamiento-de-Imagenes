@@ -11,11 +11,10 @@ class EllipseTable(tk.Frame):
     def __init__(self, master=None) -> None:
         super().__init__(master)
         # self.label = tkinter.Label(self, text="AAAAAAAA")
-        tree= ttk.Treeview(self, columns=properties, show='headings')
+        tree= ttk.Treeview(self, column=properties, show='headings')
         for i, column in enumerate(properties):
-            tree.column(f"#{i+1}", anchor=tk.CENTER)
+            tree.column(f"#{i+1}", stretch=tk.NO, width=40)
             tree.heading(f"#{i+1}", text=column)
-        # tree.pack(fill=tk.Y, expand=True)
         tree.pack()
 
         tree.bind('<ButtonRelease-1>', self.select_item)

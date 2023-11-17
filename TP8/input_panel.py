@@ -11,7 +11,14 @@ class InputPanel(tk.Frame):
         super().__init__(master)
 
         table = EllipseTable(self)
-        form = EllipseForm(self)
+
+        input_frame = tk.Frame(self)
+        form = EllipseForm(input_frame)
+        preview = EllipseImage(input_frame, size=30, figsize=1, axis='off', title='Previsualización')
+
+        props = {"padx": 5.0, "pady": 5.0}
+        form.grid(row=0, column=0, **props)
+        preview.grid(row=0, column=1, **props)
 
         def add_ellipse():
             table.add_item(form.get_ellipse())
@@ -19,14 +26,24 @@ class InputPanel(tk.Frame):
         buttons = tk.Frame(self)
         button_insert = tk.Button(buttons, text="Agregar", command=add_ellipse)
         button_remove = tk.Button(buttons, text="Eliminar", command=table.delete_selected)
-        button_insert.pack()
+        button_insert.pack(side=tk.LEFT)
         button_remove.pack(side=tk.RIGHT)
 
         image = EllipseImage(self)
 
-        table.add_change_listener(lambda e:image.draw(e))
+        def draw_ellipses(e):
+            image.draw(e)
+        table.add_change_listener(draw_ellipses)
+        form.add_on_change_listener(lambda e:print(e))
+        def draw_preview(f):
+            # image.draw(ellipses + ([f] if f is not None else []))
+            if f is not None:
+                preview.draw([f])
+        form.add_on_change_listener(draw_preview)
+        form.on_change()
 
-        table.grid(row=0, rowspan=3, column=0)
-        image.grid(row=0, column=1)
-        form.grid(row=1, column=1)
-        buttons.grid(row=2, column=1)
+        props = {"padx": 20.0, "pady": 5.0}
+        table.grid(row=0, rowspan=4, column=0, **props)
+        image.grid(row=0, column=1, **props)
+        input_frame.grid(row=1, column=1, **props)
+        buttons.grid(row=2, column=1, **props)
