@@ -15,3 +15,6 @@ class Step2(tk.Frame):
         step2vis.grid(column=0, row=1)
 
         step2.add_on_calculate_listener(lambda v:step2vis.set_options(list(map(int, np.arange(v.min, v.max, v.step)))))
+
+        self.form = step2
+        self.visualization = step2vis

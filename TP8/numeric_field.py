@@ -7,14 +7,16 @@ class NumericField(tk.Frame):
     def __init__(
             self, 
             master=None, 
-            range: Union[Range, Options]=Range(0, 1, 0.1), 
+            range=Range(0, 1, 0.1), 
             value:float=0, 
             label=None,
+            var=None
         ):
         super().__init__(master)
 
-        var = tk.StringVar()
-        var.set(str(value))
+        if var is None:
+            var = tk.StringVar()
+            var.set(str(value))
 
         self.var = var
         

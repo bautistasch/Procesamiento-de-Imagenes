@@ -12,11 +12,12 @@ properties = (
 class AngleRangeForm(tk.Frame):
     on_change_listener = []
 
-    def __init__(self, master=None):
+    def __init__(self, master=None, vars=None):
         super().__init__(master)
         property_entries = {}
-        for i, prop in enumerate(properties):
-            field = NumericField(self, range=prop.values, label=prop.name, value=prop.default)
+        if vars is None: vars = [None, None, None]
+        for i, (prop, var) in enumerate(zip(properties, vars)):
+            field = NumericField(self, range=prop.values, label=prop.name, value=prop.default, var=var)
             field.grid(row=i)
             property_entries[prop.name] = field
 
@@ -28,3 +29,8 @@ class AngleRangeForm(tk.Frame):
         step = self.property_entries["step"]
         return Range(min.get_value(), max.get_value(), step.get_value())
     
+    def get_vars(self):
+        min = self.property_entries["from"]
+        step = self.property_entries["step"]
+        max = self.property_entries["to"]
+        return (min.var, step.var, max.var)
