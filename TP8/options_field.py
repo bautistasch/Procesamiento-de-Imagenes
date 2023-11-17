@@ -52,5 +52,5 @@ class OptionsField(tk.Frame, Generic[T]):
         self.var.trace_add("write", callback=lambda *_:self.on_change(self.convert_to_t(self.var.get())))
 
     def get_value(self):
-        return float(self.var.get())
+        return self.convert_to_t(self.var.get())
     

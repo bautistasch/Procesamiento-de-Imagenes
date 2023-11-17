@@ -47,3 +47,7 @@ class InputPanel(tk.Frame):
         image.grid(row=0, column=1, **props)
         input_frame.grid(row=1, column=1, **props)
         buttons.grid(row=2, column=1, **props)
+
+        self.preview = preview
+        self.image = image
+        self.form = form

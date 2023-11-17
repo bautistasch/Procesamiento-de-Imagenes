@@ -10,7 +10,7 @@ root.wm_title("TP8")
 input_panel = InputPanel(root)
 input_panel.grid(column=0, row=0)
 
-step2 = Step2(root)
+step2 = Step2(lambda:input_panel.image.get_image(), root)
 step2.grid(column=1, row=0)
 
 step3 = Step3(step2, root)

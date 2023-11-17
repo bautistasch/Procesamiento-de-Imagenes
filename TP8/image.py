@@ -27,8 +27,12 @@ class ImageWidget(tk.Frame):
 
         self.plt_image = image
         self.canvas = canvas
+        self.image = None
 
     def draw(self, image: np.ndarray):
         self.plt_image.set_data(image)
+        self.image = image
         self.canvas.draw()
 
+    def get_image(self):
+        return self.image
