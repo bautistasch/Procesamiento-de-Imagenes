@@ -22,7 +22,7 @@ def generate_ellipse(ellipse: Ellipse):
     return [(c*x-s*y+ellipse.Cx, s*x+c*y+ellipse.Cy) for (x,y) in coords]
 
 class EllipseImage(tk.Frame):
-    def __init__(self, master=None, size=256, figsize=4, axis='on', title=None):
+    def __init__(self, master=None, size=256, figsize=4, vmin=0, vmax=1, axis='on', title=None):
         super().__init__(master)
         self.image = Image.new("F", (size, size))
         self.image_draw = ImageDraw.Draw(self.image)
@@ -30,7 +30,7 @@ class EllipseImage(tk.Frame):
         fig = Figure(figsize=(figsize, figsize), dpi=100)
         ax = fig.add_subplot()
         ax.axis(axis)
-        image = ax.imshow(np.array(self.image), vmin=0, vmax=1, cmap='hot')
+        image = ax.imshow(np.array(self.image), vmin=vmin, vmax=vmax, cmap='hot')
         if title is not None:
             ax.set_title(title, {'fontsize': 8})
         fig.tight_layout()
