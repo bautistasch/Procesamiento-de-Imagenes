@@ -15,7 +15,8 @@ class EllipseTable(tk.Frame):
         for i, column in enumerate(properties):
             tree.column(f"#{i+1}", anchor=tk.CENTER)
             tree.heading(f"#{i+1}", text=column)
-        tree.pack(fill=tk.Y, expand=True)
+        # tree.pack(fill=tk.Y, expand=True)
+        tree.pack()
 
         tree.bind('<ButtonRelease-1>', self.select_item)
 
@@ -25,7 +26,7 @@ class EllipseTable(tk.Frame):
         self.selectedItem = self.tree.focus()
     
     def emit_changed(self):
-        self.ellipses = list(Ellipse(*row['values']) for row in map(self.tree.item, self.tree.get_children()))
+        self.ellipses = list(Ellipse(*(float(v) for v in row['values'])) for row in map(self.tree.item, self.tree.get_children()))
         for callback in self.change_callbacks:
             callback(self.ellipses)
 

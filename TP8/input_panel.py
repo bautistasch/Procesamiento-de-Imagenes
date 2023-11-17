@@ -24,6 +24,8 @@ class InputPanel(tk.Frame):
 
         image = EllipseImage(self)
 
+        table.add_change_listener(lambda e:image.draw(e))
+
         table.grid(row=0, rowspan=3, column=0)
         image.grid(row=0, column=1)
         form.grid(row=1, column=1)

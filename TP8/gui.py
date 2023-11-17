@@ -7,6 +7,6 @@ root.wm_title("TP8")
 
 
 input_panel = InputPanel(root)
-input_panel.pack(expand=True)
+input_panel.pack()
 
 tkinter.mainloop()
