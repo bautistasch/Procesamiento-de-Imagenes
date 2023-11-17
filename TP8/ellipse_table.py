@@ -14,7 +14,7 @@ class EllipseTable(tk.Frame):
         tree= ttk.Treeview(self, column=properties, show='headings')
         for i, column in enumerate(properties):
             tree.column(f"#{i+1}", stretch=tk.NO, width=40)
-            tree.heading(f"#{i+1}", text=column)
+            tree.heading(f"#{i+1}", text=column.name)
         tree.pack()
 
         tree.bind('<ButtonRelease-1>', self.select_item)

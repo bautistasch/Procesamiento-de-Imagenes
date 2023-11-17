@@ -8,7 +8,7 @@ class NumericField(tk.Frame):
             self, 
             master=None, 
             range=Range(0, 1, 0.1), 
-            value=0, 
+            value:float=0, 
             label=None,
         ):
         super().__init__(master)

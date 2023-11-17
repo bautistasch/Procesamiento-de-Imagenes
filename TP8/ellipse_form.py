@@ -1,6 +1,6 @@
 
 import tkinter as tk
-from ellipse import Ellipse, properties, property_names, property_ranges
+from ellipse import Ellipse, properties
 from numeric_field import NumericField
 
 default_ellipse = Ellipse(I=.3, A=90, Cx=-.4, Cy=0, X=.2, Y=.4)
@@ -13,11 +13,11 @@ class EllipseForm(tk.Frame):
         super().__init__(master)
         
         property_entries = {}
-        for i, (property, name, range) in enumerate(zip(properties, property_names, property_ranges)):
-            field = NumericField(self, range=range, label=name, value=default_ellipse[i])
+        for i, prop in enumerate(properties):
+            field = NumericField(self, range=prop.values, label=prop.label, value=default_ellipse[i])
             field.set_on_change(lambda v:self.on_change())
             field.grid(row=i)
-            property_entries[property] = field
+            property_entries[prop.name] = field
 
         self.property_entries = property_entries
 
