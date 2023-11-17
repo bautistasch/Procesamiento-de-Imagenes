@@ -15,7 +15,7 @@ class Step2Visualizer(tk.Frame):
             master=self, 
             label="Ángulo"
         )
-        angle.set_options(["asdf", "fdsa"])
+        # image = Elip
 
         angle.pack()
 
