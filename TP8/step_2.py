@@ -6,6 +6,7 @@ import implementation
 
 class Step2(tk.Frame):
     on_calculate_listeners = []
+    results = None
 
     def __init__(self, image_getter, master=None):
         super().__init__(master)
@@ -24,8 +25,8 @@ class Step2(tk.Frame):
     def on_calculate(self, v):
         angles = np.arange(v.min, v.max, v.step)
 
-        results = implementation.radon(self.image_getter(), angles)
+        self.results = implementation.radon(self.image_getter(), angles)
 
-        self.visualization.set_options(list(angles), results)
+        self.visualization.set_options(list(angles), self.results)
 
 

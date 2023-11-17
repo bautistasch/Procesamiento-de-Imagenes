@@ -9,4 +9,5 @@ def radon(image: np.ndarray, angles: list[float]) -> list[np.ndarray]:
 
 def inverse_radon(radon: list[tuple[float, np.ndarray]], interpolation: str, filter: str, size: int) -> np.ndarray:
     # TODO: Hacer
-    return np.zeros((size, size), dtype=np.float32)
+    res = np.zeros((size, size), dtype=np.float32)
+    return res

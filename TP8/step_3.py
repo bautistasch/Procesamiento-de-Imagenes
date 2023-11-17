@@ -1,7 +1,13 @@
 import tkinter as tk
+from options_field import OptionsField
+from image import ImageWidget
 from angle_range_form import AngleRangeForm
 from step_2 import Step2
 import numpy as np
+import implementation
+
+interpolations = ['Nearest Neighbor']
+filters = ['Ram-Lak']
 
 class Step3(tk.Frame):
     on_calculate_listeners = []
@@ -10,10 +16,30 @@ class Step3(tk.Frame):
         super().__init__(master)
         
         angle_range_form = AngleRangeForm(self, vars=step_2.form.angle_range_form.get_vars())
-        # calculate_button = tk.Button(self, command=self.on_calculate, text="Calcular")
+        interpolation = OptionsField(str, master=self, label='Interpolación', value='')
+        interpolation.set_options(interpolations)
+        filter = OptionsField(str, master=self, label='Filtro', value='')
+        filter.set_options(filters)
+        calculate_button = tk.Button(self, command=self.on_calculate, text="Calcular")
+        image = ImageWidget(self)
 
         angle_range_form.pack()
-        # calculate_button.pack()
+        interpolation.pack()
+        filter.pack()
+        calculate_button.pack()
+        image.pack()
 
         self.angle_range_form = angle_range_form
-        # self.calculate_button = calculate_button
+        self.calculate_button = calculate_button
+        self.step_2 = step_2
+        self.interpolation = interpolation
+        self.filter = filter
+        self.image = image
+    
+    def on_calculate(self):
+        if self.step_2.results is not None:
+            radon = self.step_2.results
+
+            angles = self.angle_range_form.get_angle_range()
+            reconstructed = implementation.inverse_radon(list(zip(np.arange(angles.min, angles.max, angles.step), radon)), self.interpolation.get_value(), self.filter.get_value(), 256)
+            self.image.draw(reconstructed)
