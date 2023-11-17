@@ -18,6 +18,7 @@ class EllipseForm(tk.Frame):
             label.grid(row=i, column=0)
             var = tk.StringVar()
             var.set(str(default_ellipse[i]))
+            var.trace_add("write", callback=lambda var,index,mode:self.on_change())
             entry = tk.Entry(self, textvariable=var)
             entry.bind('<FocusOut>', self.on_unfocused)
             entry.bind('<FocusIn>', self.on_focused)
@@ -28,10 +29,6 @@ class EllipseForm(tk.Frame):
         self.entries = entries
 
         self.on_change()
-
-    def initialize_vars(self):
-        for (*_, var) in self.entries:
-            var.trace_add("write", callback=lambda var,index,mode:self.on_change())
 
     def get_ellipse(self) -> Ellipse:
         return Ellipse(**{p:float(v.get()) for p, v in self.property_entries.items()})
@@ -44,7 +41,6 @@ class EllipseForm(tk.Frame):
             callback(ellipse)
 
     def on_change(self, *_):
-        print("AAAAA")
         self.call_on_change(self.get_ellipse())
 
     def on_unfocused(self, *_):
