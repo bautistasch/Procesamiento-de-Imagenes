@@ -1,16 +1,12 @@
-
-from collections import namedtuple
-from typing import Generic, NamedTuple, TypeVar
+from typing import Any, NamedTuple
 
 class Range(NamedTuple):
     min: float
     max: float
     step: float
 
-T = TypeVar('T')
-
-class Options(NamedTuple, Generic[T]):
-    options: tuple[T]
+class Options(NamedTuple):
+    options: tuple
 
 class RangeProperty(NamedTuple):
     name: str
@@ -18,8 +14,8 @@ class RangeProperty(NamedTuple):
     values: Range
     default: float
 
-class OptionsProperty(NamedTuple, Generic[T]):
+class OptionsProperty(NamedTuple):
     name: str
     label: str
-    values: Options[T]
-    default: T
+    values: Options
+    default: Any
