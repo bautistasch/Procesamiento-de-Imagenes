@@ -21,8 +21,8 @@ def generate_ellipse(ellipse: Ellipse):
 class EllipseImage(ImageWidget):
     def __init__(self, size=256, **kwargs):
         super().__init__(**kwargs)
-        self.image = Image.new("F", (size, size))
-        self.image_draw = ImageDraw.Draw(self.image)
+        self.image2 = Image.new("F", (size, size))
+        self.image_draw = ImageDraw.Draw(self.image2)
 
         self.size = size
 
@@ -46,7 +46,5 @@ class EllipseImage(ImageWidget):
                 width=0
             )
 
-        self.plt_image.set_data(np.array(self.image))
-
-        super().draw(np.array(self.image))
+        super().draw(np.array(self.image2))
 
