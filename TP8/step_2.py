@@ -11,10 +11,12 @@ class Step2(tk.Frame):
     def __init__(self, image_getter, master=None):
         super().__init__(master)
         
+        step2label = tk.Label(self, text="Radon")
         step2 = Step2Form(self)
         step2vis = Step2Visualizer(self)
-        step2.grid(column=0, row=0)
-        step2vis.grid(column=0, row=1)
+        step2label.grid(column=0, row=0)
+        step2.grid(column=0, row=1)
+        step2vis.grid(column=0, row=2)
 
         step2.add_on_calculate_listener(lambda v:self.on_calculate(v))
 

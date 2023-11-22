@@ -14,7 +14,7 @@ class InputPanel(tk.Frame):
 
         input_frame = tk.Frame(self)
         form = EllipseForm(input_frame)
-        preview = EllipseImage(size=30, master=input_frame, figsize=1, axis='off', title='Previsualización')
+        preview = EllipseImage(size=30, master=input_frame, figsize=1, axis='off', title='Previsualización', colorbar=False)
 
         props = {"padx": 5.0, "pady": 5.0}
         form.grid(row=0, column=0, **props)

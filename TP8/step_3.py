@@ -15,6 +15,8 @@ class Step3(tk.Frame):
     def __init__(self, step_2: Step2, master=None):
         super().__init__(master)
         
+        step3label = tk.Label(self, text="iRadon")
+
         angle_range_form = AngleRangeForm(self, vars=step_2.form.angle_range_form.get_vars())
         interpolation = OptionsField(str, master=self, label='Interpolación', value='')
         interpolation.set_options(interpolations)
@@ -23,6 +25,7 @@ class Step3(tk.Frame):
         calculate_button = tk.Button(self, command=self.on_calculate, text="Calcular")
         image = ImageWidget(self)
 
+        step3label.pack()
         angle_range_form.pack()
         interpolation.pack()
         filter.pack()
