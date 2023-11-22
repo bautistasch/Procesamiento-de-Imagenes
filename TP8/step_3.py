@@ -7,7 +7,7 @@ import numpy as np
 import implementation
 
 interpolations = ['Nearest Neighbor']
-filters = ['Ram-Lak']
+filters = ['ramp', 'shepp-logan', 'cosine', 'hamming', 'hann']
 
 class Step3(tk.Frame):
     on_calculate_listeners = []
@@ -41,5 +41,5 @@ class Step3(tk.Frame):
             radon = self.step_2.results
 
             angles = self.angle_range_form.get_angle_range()
-            reconstructed = implementation.inverse_radon(list(zip(np.arange(angles.min, angles.max, angles.step), radon)), self.interpolation.get_value(), self.filter.get_value(), 256)
+            reconstructed = implementation.inverse_radon(radon, np.arange(angles.min, angles.max, angles.step), self.interpolation.get_value(), self.filter.get_value(), 256)
             self.image.draw(reconstructed)

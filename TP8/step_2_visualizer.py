@@ -14,23 +14,32 @@ class Step2Visualizer(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         
-        angle = OptionsField(
-            str,
-            master=self, 
-            label="Ángulo"
+        # angle = OptionsField(
+            # str,
+            # master=self, 
+            # label="Ángulo"
+        # )
+        # angle.set_on_change(lambda v:self.image_widget.draw(self.images[self.floats_as_strings.index(v)]))
+        image_widget = ImageWidget(self,
+            xlabel="Projection angle (deg)",
+            ylabel="Projection position (pixels)"
         )
-        angle.set_on_change(lambda v:self.image_widget.draw(self.images[self.floats_as_strings.index(v)]))
-        image_widget = ImageWidget(self)
 
-        angle.pack()
+        # angle.pack()
         image_widget.pack()
 
-        self.angle = angle
+        # self.angle = angle
         self.image_widget = image_widget
 
     def set_options(self, options: list[float], images: list[np.ndarray]):
         self.floats_as_strings: list[str | None] = list(map(str, options))
 
         self.images = images
-        self.angle.set_options(self.floats_as_strings)
+        self.image_widget.draw(
+            images, 
+            vmin=0, 
+            vmax=np.max(images), 
+            extent=(np.min(options), np.max(options), -180, 180)
+        )
+        # self.angle.set_options(self.floats_as_strings)
 
